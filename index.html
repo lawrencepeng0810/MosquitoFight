@@ -16,7 +16,8 @@
 	
 	<div id="info">
 		<span>Score : </span><span id="score-board">0</span>
-		<span>Time : </span><span id="counter"></span>
+		<span> Time : </span><span id="counter"></span>
+		<span> Message : </span><span id="message"></span>
 	</div>
 	<script type="text/javascript">
 		var score = 0 ;
@@ -28,8 +29,8 @@
 					var mosquito = document.createElement('img');
 					mosquito.src = './mosquito.png';
 					mosquito.style.position= 'absolute';
-					mosquito.style.width='180px';
-					mosquito.style.height='180px';
+					mosquito.style.width='130px';
+					mosquito.style.height='130px';
 					var x=Math.floor(Math.random() * window.innerWidth/2);
 					var y=Math.floor(Math.random() * window.innerHeight/2);
 //console.log(x);
@@ -40,12 +41,14 @@
 					mosquito.id='mosquito';
 					document.body.appendChild(mosquito);
 				}
+					document.getElementById('message').innerHTML='';
 					document.getElementById('counter').innerHTML=countdown-=1;
 					if (countdown<=0) {
 						gameOver=true;
 						clearInterval(timer);
-						clearInterval(disappear);
-						document.getElementById('counter').innerHTML='GameOver';
+						//clearInterval(disappear);
+						document.getElementById('counter').innerHTML='0';
+						document.getElementById('message').innerHTML='時間結束';
 					}
 		},1000);
 		
@@ -56,8 +59,9 @@
 					}
 				},3000);
 				
-				document.body.addEventListener('click',function (e) {
+				document.body.addEventListener('click',function(e) {
 					var scoreBoard=document.getElementById('score-board');
+					
 					//console.log(e.target.parentNode);
 					//console.log(e.target);
 					//console.log(document.getElementById('mosquito'));
@@ -65,6 +69,8 @@
 					score +=5;
 					
 					scoreBoard.innerHTML=score;
+					document.getElementById('message').innerHTML='打中蚊子了';
 				});
+				
 	</script>
 </html>
