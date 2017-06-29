@@ -1,0 +1,70 @@
+<html>	
+<head>
+<meta charset="utf-8">
+<title>MosquitoFight</title>
+</head>
+<style>
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="application/javascript">
+	
+</script>
+
+<body>
+
+<h1>MosquitoFight</h1>
+	
+	<div id="info">
+		<span>Score : </span><span id="score-board">0</span>
+		<span>Time : </span><span id="counter"></span>
+	</div>
+	<script type="text/javascript">
+		var score = 0 ;
+		var countdown = 10;
+		
+		var timer=setInterval(function () {
+				var gameOver = false;
+				if (document.getElementById('mosquito')=== null && gameOver!=true) {
+					var mosquito = document.createElement('img');
+					mosquito.src = './mosquito.png';
+					mosquito.style.position= 'absolute';
+					mosquito.style.width='180px';
+					mosquito.style.height='180px';
+					var x=Math.floor(Math.random() * window.innerWidth/2);
+					var y=Math.floor(Math.random() * window.innerHeight/2);
+//console.log(x);
+					//console.log(y);
+					mosquito.style.left=x +'px';
+					mosquito.style.top=50+y + 'px';
+					
+					mosquito.id='mosquito';
+					document.body.appendChild(mosquito);
+				}
+					document.getElementById('counter').innerHTML=countdown-=1;
+					if (countdown<=0) {
+						gameOver=true;
+						clearInterval(timer);
+						clearInterval(disappear);
+						document.getElementById('counter').innerHTML='GameOver';
+					}
+		},1000);
+		
+		
+				var disappear = setInterval(function() {
+					if (document.getElementById('mosquito') !== null) {
+						document.body.removeChild(document.getElementById('mosquito'));
+					}
+				},3000);
+				
+				document.body.addEventListener('click',function (e) {
+					var scoreBoard=document.getElementById('score-board');
+					//console.log(e.target.parentNode);
+					//console.log(e.target);
+					//console.log(document.getElementById('mosquito'));
+					e.target.parentNode.removeChild(e.target);
+					score +=5;
+					
+					scoreBoard.innerHTML=score;
+				});
+	</script>
+</html>
